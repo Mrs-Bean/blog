@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html data-page-node-id="cWIqbufwIvPxRLVIBiRBgI" lang="zh-CN">
+<head data-page-node-id="an2vY4dVtHTO13QiAarSvY">
+<script data-page-node-id="g14HyeKCp2OvsuktqPPspN" src="/page/page_comm/inject.js"></script>
+<meta data-page-node-id="n0lfyio1AwrH61hfFhkyem" charset="UTF-8">
+<meta data-page-node-id="BRWSxbsBGIlnAuZuNORyKc" content="width=device-width, initial-scale=1.0" name="viewport">
+<title data-page-node-id="1aBWzyJuhaNGM7MWJ9QsoZ" data-pnid-children="iiqI5Ao1VjKin0vtLH2IKj">Devin · 前端开发工程师 | 个人博客</title>
+<meta data-page-node-id="KEBNDVR7URW7kjvL1bySed" content="Devin的个人博客 — 前端开发工程师，9 年经验，专注 Vue / React / Cesium 地图 / 数据可视化 / 态势感知大屏。" name="description">
+<style data-page-node-id="dTv7IZzEUvZ5NfQ1U6Qkx6" data-pnid-children="gvFqC9Md8gz9u47UwLHYgA">
+  :root{
+    --bg:#f6f8fc; --bg-soft:#ffffff; --bg-card:#ffffff; --text:#1f2733; --text-soft:#5b6675;
+    --muted:#8a94a6; --line:#e6eaf2; --brand:#4f6ef7; --brand-2:#7c5cff; --brand-soft:#eef1ff;
+    --accent:#ff7a59; --shadow:0 10px 30px rgba(31,39,51,.08); --shadow-sm:0 4px 14px rgba(31,39,51,.06);
+    --radius:18px; --radius-sm:12px; --maxw:1100px;
+  }
+  html[data-theme="dark"]{
+    --bg:#0e1117; --bg-soft:#161b24; --bg-card:#161b24; --text:#e7ecf3; --text-soft:#aab4c4;
+    --muted:#7b879a; --line:#242c39; --brand:#6d87ff; --brand-2:#9a7dff; --brand-soft:#1b2233;
+    --accent:#ff8a6b; --shadow:0 10px 30px rgba(0,0,0,.35); --shadow-sm:0 4px 14px rgba(0,0,0,.3);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased;
+    transition:background .3s ease,color .3s ease;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(12px);
+    background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px}
+  .logo .dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:grid;place-items:center;color:#fff;font-size:15px;font-weight:800}
+  .nav-links{display:flex;gap:6px;align-items:center}
+  .nav-links a{padding:8px 13px;border-radius:10px;color:var(--text-soft);font-size:14px;font-weight:600;transition:.2s}
+  .nav-links a:hover{background:var(--brand-soft);color:var(--brand)}
+  .theme-btn{cursor:pointer;border:1px solid var(--line);background:var(--bg-card);color:var(--text);
+    width:38px;height:38px;border-radius:10px;font-size:16px;display:grid;place-items:center;transition:.2s}
+  .theme-btn:hover{border-color:var(--brand);color:var(--brand)}
+  .menu-toggle{display:none}
+  /* ---------- HERO ---------- */
+  header.hero{position:relative;overflow:hidden;padding:70px 0 56px}
+  .hero-bg{position:absolute;inset:0;z-index:0;opacity:.6}
+  .hero-bg::before,.hero-bg::after{content:"";position:absolute;border-radius:50%;filter:blur(60px)}
+  .hero-bg::before{width:420px;height:420px;background:radial-gradient(circle,var(--brand),transparent 70%);top:-140px;right:-80px;opacity:.35}
+  .hero-bg::after{width:360px;height:360px;background:radial-gradient(circle,var(--brand-2),transparent 70%);bottom:-160px;left:-100px;opacity:.28}
+  .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;gap:42px;align-items:center}
+  .avatar{width:148px;height:148px;border-radius:28px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
+    display:grid;place-items:center;color:#fff;font-size:62px;font-weight:800;box-shadow:var(--shadow);
+    border:4px solid var(--bg-card)}
+  .hero h1{font-size:40px;line-height:1.2;font-weight:800;letter-spacing:.5px}
+  .hero .role{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:16px;font-weight:600;color:var(--brand);
+    background:var(--brand-soft);padding:6px 14px;border-radius:999px}
+  .hero .role .pin{font-size:14px}
+  .hero p.bio{margin-top:16px;color:var(--text-soft);font-size:15.5px;max-width:640px}
+  .hero .cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:12px;font-weight:700;font-size:14.5px;transition:.2s;cursor:pointer;border:1px solid transparent}
+  .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;box-shadow:var(--shadow-sm)}
+  .btn.primary:hover{transform:translateY(-2px)}
+  .btn.ghost{background:var(--bg-card);border-color:var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--brand);color:var(--brand)}
+  .socials{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+  .socials a{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--text-soft);
+    background:var(--bg-card);border:1px solid var(--line);padding:8px 13px;border-radius:10px;transition:.2s}
+  .socials a:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-2px)}
+  /* ---------- STATS ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px}
+  .stat{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:22px;text-align:center;box-shadow:var(--shadow-sm)}
+  .stat .num{font-size:30px;font-weight:800;background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .label{margin-top:6px;font-size:13px;color:var(--muted);font-weight:600}
+  /* ---------- SECTION ---------- */
+  section{padding:64px 0}
+  .sec-head{margin-bottom:34px}
+  .sec-head .eyebrow{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--brand)}
+  .sec-head h2{font-size:28px;font-weight:800;margin-top:6px}
+  .sec-head p{color:var(--text-soft);margin-top:8px;font-size:15px;max-width:680px}
+  .card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);transition:.25s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--brand) 35%,var(--line))}
+  /* ---------- ABOUT / SKILLS ---------- */
+  .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:26px}
+  .about-list{list-style:none;display:grid;gap:12px;margin-top:8px}
+  .about-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--text-soft)}
+  .about-list li::before{content:"";flex:0 0 8px;width:8px;height:8px;border-radius:50%;margin-top:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+  .skill-group{margin-bottom:18px}
+  .skill-group h4{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--text)}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-size:13px;font-weight:600;padding:6px 12px;border-radius:9px;background:var(--brand-soft);color:var(--brand);border:1px solid transparent;transition:.2s}
+  .tag:hover{background:var(--brand);color:#fff}
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative;padding-left:28px}
+  .timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--brand),var(--brand-2))}
+  .tl-item{position:relative;margin-bottom:26px}
+  .tl-item::before{content:"";position:absolute;left:-28px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--bg-card);border:3px solid var(--brand)}
+  .tl-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;align-items:baseline}
+  .tl-top h3{font-size:16.5px;font-weight:700}
+  .tl-date{font-size:13px;color:var(--muted);font-weight:600;white-space:nowrap}
+  .tl-org{font-size:14px;color:var(--brand);font-weight:600;margin:2px 0 8px}
+  .tl-item p{font-size:14px;color:var(--text-soft)}
+  .exp-locked{text-align:center;padding:14px 6px 6px}
+  .exp-locked .lock{width:54px;height:54px;margin:0 auto 14px;border-radius:16px;display:grid;place-items:center;font-size:24px;background:var(--brand-soft)}
+  .exp-locked h3{font-size:18px;font-weight:800}
+  .exp-locked p{margin-top:8px;font-size:14px;color:var(--text-soft)}
+  .exp-locked .row{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .exp-locked .row a{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);color:var(--brand);transition:.2s}
+  .exp-locked .row a:hover{border-color:var(--brand);background:var(--brand-soft);transform:translateY(-2px)}
+  /* ---------- PROJECTS ---------- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+  .filters button{border:1px solid var(--line);background:var(--bg-card);color:var(--text-soft);padding:7px 15px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.2s}
+  .filters button.active,.filters button:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-soft)}
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .proj{display:flex;flex-direction:column;gap:10px}
+  .proj .badge{align-self:flex-start;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--brand-soft);color:var(--brand)}
+  .proj h3{font-size:17px;font-weight:700}
+  .proj .meta{font-size:12.5px;color:var(--muted);font-weight:600}
+  .proj p{font-size:13.5px;color:var(--text-soft);flex:1}
+  .proj .stack{display:flex;flex-wrap:wrap;gap:6px}
+  .proj .stack span{font-size:11.5px;padding:3px 9px;border-radius:7px;background:var(--bg);border:1px solid var(--line);color:var(--text-soft);font-weight:600}
+  /* ---------- ARTICLES ---------- */
+  .articles-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+  .search-box{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--line);border-radius:12px;padding:9px 14px;min-width:260px}
+  .search-box input{border:none;background:transparent;outline:none;color:var(--text);font-size:14px;width:100%}
+  .search-box span{color:var(--muted)}
+  .article-list{display:grid;gap:14px}
+  .article{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:18px 20px;border:1px solid var(--line);
+    border-radius:var(--radius-sm);background:var(--bg-card);transition:.2s;cursor:pointer}
+  .article:hover{border-color:var(--brand);transform:translateX(4px);box-shadow:var(--shadow-sm)}
+  .article .idx{width:42px;height:42px;border-radius:11px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:800;font-size:16px}
+  .article .main h3{font-size:16px;font-weight:700;line-height:1.4}
+  .article .main .sub{margin-top:5px;display:flex;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-weight:600}
+  .article .main .chips{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+  .article .main .chips span{font-size:11px;padding:3px 9px;border-radius:7px;background:var(--bg);border:1px solid var(--line);color:var(--text-soft);font-weight:600}
+  .article .go{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:700;font-size:13.5px;white-space:nowrap}
+  .article .go .arrow{transition:.2s}
+  .article:hover .go .arrow{transform:translateX(3px)}
+  .sample-note{font-size:12.5px;color:var(--accent);font-weight:600;margin-bottom:14px;display:inline-flex;gap:6px;align-items:center}
+  /* ---------- CONTACT ---------- */
+  .contact{background:linear-gradient(135deg,var(--brand),var(--brand-2));border-radius:var(--radius);padding:42px;color:#fff;text-align:center;box-shadow:var(--shadow)}
+  .contact h2{font-size:26px;font-weight:800}
+  .contact p{margin-top:10px;opacity:.92;font-size:15px}
+  .contact .row{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .contact .row a{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;padding:11px 20px;border-radius:12px;font-weight:700;font-size:14px;transition:.2s}
+  .contact .row a:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+  /* ---------- FOOTER ---------- */
+  footer{padding:34px 0;text-align:center;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);margin-top:20px}
+  footer a{color:var(--brand);font-weight:600}
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:.6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  /* ---------- responsive ---------- */
+  @media(max-width:860px){
+    .hero-inner{grid-template-columns:1fr;text-align:center;gap:24px;justify-items:center}
+    .hero p.bio{margin-left:auto;margin-right:auto}
+    .hero .cta,.socials{justify-content:center}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .two-col{grid-template-columns:1fr}
+    .proj-grid{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .menu-toggle{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--bg-card);cursor:pointer}
+    .nav-links.show{display:flex;position:absolute;top:62px;left:0;right:0;flex-direction:column;background:var(--bg-card);padding:14px;border-bottom:1px solid var(--line)}
+    .article{grid-template-columns:auto 1fr;}
+    .article .go{grid-column:2;justify-self:start}
+  }
+</style>
+</head>
+<body data-page-node-id="OYrCM9UjAB1geijpppurdo">
+
+<nav data-page-node-id="vYjdcRUfzaN8KUVLmObs5N">
+  <div data-page-node-id="B8VGD7aiCuzrz0jUpGuLG9" class="wrap nav-inner">
+    <div data-page-node-id="0N1UeQgcNA7yVwTucZtArL" class="logo"><span data-page-node-id="X67LGYYYdVEOWBp6TE8eYw" class="dot"><!--pnid:WtYK74ridKYh90osY0Q7PX-->谢</span><span data-page-node-id="R0TAahzKBFgQio6wsjR6Kn"><!--pnid:bwIcnR0g8bDi6TvMMewUlt-->Devin</span></div>
+    <div data-page-node-id="99HxT7NHDqLX7g0t9DY2cr" class="nav-links" id="navLinks">
+      <a data-page-node-id="nT7cQubfHkyvBakcrQgBS2" href="#about"><!--pnid:EKUnlDSjnsACEvyotRwS6Z-->关于</a>
+      <a data-page-node-id="SzYBZjfPwuZqgq2ZfxCPme" href="#skills"><!--pnid:4okQOfo6ybLMEAQwU4KSC7-->技能</a>
+      <a data-page-node-id="8glw9ZgnP9nKsVZYZEvtFn" href="#exp"><!--pnid:sGCuM4DIGsoGGMZ8nOUWBS-->经历</a>
+      <a data-page-node-id="soG1aPaNJs3bjI6sUR7sru" href="#projects"><!--pnid:NrWkuiDK6bl0ldvtL8B5t2-->项目</a>
+      <a data-page-node-id="osW6fZfwblNqLBm7jXl8dY" href="#articles"><!--pnid:c9npq8NA2zx38L7Yh8LrGe-->文章</a>
+      <a data-page-node-id="yKJjDHSFORVtE6WBIWOS3W" href="#contact"><!--pnid:sVBjMBdQx1LnsPDICDsa9o-->联系</a>
+    </div>
+    <div data-page-node-id="IuDf1MZqZP3vjQ4YsYdYnI" style="display:flex; gap:8px; align-items:center">
+      <button data-page-node-id="jNWKqiTKd3H0WMnRE2Avzi" class="theme-btn" id="themeBtn" title="切换主题"><!--pnid:MkMSx84ih47JAUQjIo14kz-->🌙</button>
+      <button data-page-node-id="HMMEJF1YiZGDKvvI82imZQ" class="menu-toggle" id="menuToggle"><!--pnid:HOYsqBvkY7UpeZ8OzMw0sH-->☰</button>
+    </div>
+  </div>
+</nav>
+
+<header data-page-node-id="5ColGvJizr6m7Bu5ovsM3P" class="hero">
+  <div data-page-node-id="oHQbBol3g9oAuNhOxXrwTj" class="hero-bg"></div>
+  <div data-page-node-id="pCvXfRwreyDEOA7a0x1UTn" class="wrap hero-inner">  
+    <div data-page-node-id="HmMERkZDNPn37BGrfKFWRO" class="avatar"><!--pnid:RQWjNFQHBkt805wB0B20Ur-->D</div>
+    <div data-page-node-id="6BXefhgdWoBy9AofRPtmG5">
+      <h1 data-page-node-id="GgebQ0pYSjpk5XqgVQqm2F"><!--pnid:1uFk7Gp55Pq8bQQ1VXITgY-->Devin</h1>
+      <div data-page-node-id="ooj3dRggLuESyGzHPDRcd1" class="role"><span data-page-node-id="x1LFir48HxOQytmSZ0DfqC" class="pin"><!--pnid:nLgIOYiyxKiMoquCnBDVBd-->📍</span><!--pnid:HS0qIDMgjZxpWM46HUFC3r--> 前端开发工程师 · 中国</div>
+      <p data-page-node-id="iKUfNs4eIIO73wgeTvDKfP" class="bio"><!--pnid:bYGXVt0j9ZsW5sjx7QHHH5-->9 年前端开发经验，深耕金融证券、管理系统、数据可视化大屏、Cesium/OpenLayer 二三维地图与态势感知系统。带过前端团队，主导过框架选型、低代码平台与 AI 研判类项目，也写技术专利与技术博客。</p>
+      <div data-page-node-id="ruCdFuOh79DKw3dnBFvFcu" class="cta">
+        <a data-page-node-id="xhkdt8CCjqBSDeUKyoCpjt" class="btn primary" href="#projects"><!--pnid:9lR0Wc4ksdZbwMXLtfFuVs-->查看项目 ↓</a>
+        <a data-page-node-id="vEZMN3ZVIlYuFBg5824y64" class="btn ghost" href="#contact"><!--pnid:ffWHNx3fHEWEfI9HagP0gO-->联系我</a>
+      </div>
+      <div data-page-node-id="2GI3D4JBgolULu9AiLqWQn" class="socials">
+        <a data-page-node-id="Vu8OEwZURVyH9586sAESPW" href="mailto:841188903@qq.com"><!--pnid:BAbcdP3luImKt0QlvwBBXf-->✉️ 841188903@qq.com</a>
+        <a data-page-node-id="XF1vL10Ey0ac2LVdjimaVV" href="tel:13528491897"><!--pnid:xH7YUwXO3xDxBUeuuxHYVm-->📱 135-****-1897</a>
+        <a data-page-node-id="BmcATRQfm6xVL29PRKUn7H" href="#articles"><!--pnid:jucXSazapVi27dxVyIfI8A-->📝 CSDN 文章</a>
+      </div>
+    </div>
+  </div>
+  <div data-page-node-id="AKaqgnyN3KjGVcB9nr1cJH" class="wrap stats" id="stats">
+    <div data-page-node-id="fVPLOwFX2dSVMxnYF6InCU" class="stat"><div data-page-node-id="T0UDaDGxvBMvdQB3B0flSZ" class="num" data-to="9"><!--pnid:7TbIA2PLmBy11Nc5PrhydE-->0</div><div data-page-node-id="WF3dmMnyeh7LATGjgT5oE0" class="label"><!--pnid:lAeiBI665C6sCxfKIXSKFc-->年前端经验</div></div>
+    <div data-page-node-id="GEckm4OOov9f9FhqYuZujR" class="stat"><div data-page-node-id="IXM7lbLNyDqcyFPgGoPf93" class="num" data-to="15"><!--pnid:xrJTDCRg9M52PnbtP7zd2Y-->0</div><div data-page-node-id="ehyCvbzNKfuFtPaQeWSaOz" class="label"><!--pnid:IqM2B4f5O3ZM3yBAzmzfiy-->+ 主导项目</div></div>
+    <div data-page-node-id="X8boMkZWwMmfXsMgmLqh7o" class="stat"><div data-page-node-id="YcbN2SX3AgZ78vjHmACPm3" class="num" data-to="20"><!--pnid:ENBNKxybGVzBm3gtljmmY4-->0</div><div data-page-node-id="kCb1PXSvjYOKPUIpK9gfeb" class="label"><!--pnid:b4f5SHkLyXb0m7fpehkF02-->+ 技术栈</div></div>
+    <div data-page-node-id="6qAxsZxYa44SLEXMUAS0c1" class="stat"><div data-page-node-id="Sx65Z8ifJXsNOzTcxK8wtA" class="num"><!--pnid:mfNI5kKixPLW1T9eL1kV9b-->🏆</div><div data-page-node-id="00X7nXavBTtt9bczpbr0Jm" class="label"><!--pnid:A4pnHXfxET49ULa6mCepHe-->技术专利 / 培训</div></div>
+  </div>
+</header>
+
+<section data-page-node-id="ieWgrOvUo8XvYfP8VTAX9f" id="about">
+  <div data-page-node-id="P7YfCX99RMdrLwAckrweWf" class="wrap">
+    <div data-page-node-id="smNxMQb883JKIQGm5CDt0g" class="sec-head reveal">
+      <div data-page-node-id="SAuIriTfdccFJB7ZsN9U5P" class="eyebrow"><!--pnid:AVii6Byl7llx48vmH7sLrv-->About</div>
+      <h2 data-page-node-id="jcve8yObIincYzE04FRRuC"><!--pnid:kQ88nj8s2jRsB1ws4Ua864-->关于我</h2>
+      <p data-page-node-id="gGXjqO13oOQWAbzTrjVvtS"><!--pnid:umhn6XhuZVbahnvPsBKc9v-->材料化学本科跨界前端，从证券行情交易 H5 做起，逐步覆盖大屏可视化、地图引擎与军工态势感知系统。喜欢把复杂业务抽象成可复用组件，也乐于做技术沉淀与分享。</p>
+    </div>
+    <div data-page-node-id="8Ps0xqAm5lZgszZs0ccOj5" class="card reveal">
+      <ul data-page-node-id="9U2Ab2HsVdjoFID8CEPj5O" class="about-list">
+        <li data-page-node-id="YTc2BJMoKIanR21poLOhfo"><strong data-page-node-id="5ynZr9cj8fnGepoFc9wIYQ"><!--pnid:gx72scM3UKsCz4sRsBAxXm-->基本信息：</strong><!--pnid:3qyYhBhXSI1oylGyfipoUi-->Devin · 32 岁 · 现居中国 · 求职意向前端开发工程师</li>
+        <li data-page-node-id="SsiaAOjvvLWTfbZvErQhjj"><strong data-page-node-id="4IV3Q91aYcn4kKTV5lU4Bq"><!--pnid:206Qdi01k329hFaL4QneUx-->教育背景：</strong><!--pnid:6rG3MGS3ERJ43GBkT5HXbf-->xx 大学（计算机 本科 2012.09–2016.06）</li>
+        <li data-page-node-id="hdYbb9pq2qInVDx9eDrujj"><strong data-page-node-id="TAZrVBUqvfauwKzbbmMhsj"><!--pnid:hlP5YEs87IauY2KXE38jVe-->核心方向：</strong><!--pnid:XqTkmFgiIo3libw7RxNPDE-->金融证券前端、数据可视化大屏、Cesium / OpenLayer / fengMap 地图、低代码平台、AI 态势感知</li>
+        <li data-page-node-id="JGmjm3drc8X7GXwb8Mpcvy"><strong data-page-node-id="8XdsTldVvRMmROu4xUa2Pm"><!--pnid:PVSC6XZ2vbFBKYbJ5kbc9C-->团队经验：</strong><!--pnid:7gCDmwDTGyrL58lh85CXq3-->担任过前端组负责人，负责任务分配、技术调研、难点攻克、现场部署与新人培训</li>
+        <li data-page-node-id="a2UAU8B5BlmAanHrun8Cng"><strong data-page-node-id="PESNrEp8Z0X3eqIbCtSmGL"><!--pnid:IFWWeB8zdyewXcq6bvrhEL-->工程能力：</strong><!--pnid:2QoyHl0JCKSHMn6C8CES2p-->独立搭建前端框架、设计高复用组件、撰写需求文档与技术方案，主导技术专利编写</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section data-page-node-id="LIMETB1VPalgRl1Y8zBM69" id="skills" style="background:var(--bg-soft)">
+  <div data-page-node-id="2vqCwUmqpaRv1PDmnBBTPS" class="wrap">
+    <div data-page-node-id="Vdg5z3bTobEg0zy1kwBSh0" class="sec-head reveal">
+      <div data-page-node-id="UOQpBgGb9Eb6gdxoKFpS0M" class="eyebrow"><!--pnid:odI0ZZA8zPpc2zkPErLb1O-->Skills</div>
+      <h2 data-page-node-id="Pr2aPUsedP1nlCoi3N1xEt"><!--pnid:6OESP345rijZqEyNyp54sB-->技术栈</h2>
+      <p data-page-node-id="8uC6Xd3c2EmkrIYz0FPyQ9"><!--pnid:8Rali1rBF6plDm9IjIES7F-->从基础三件套到工程化、地图引擎与后端接触，覆盖面广，主打前端工程与可视化。</p>
+    </div>
+    <div data-page-node-id="9Vv9cExUdAtwHayoTSocjK" class="two-col">
+      <div data-page-node-id="sGx9VeNvN0WZM7EWkbNya8" class="card reveal">
+        <div data-page-node-id="8UtacSeESF6puQ1UDiQIGk" class="skill-group"><h4 data-page-node-id="cEUWL6Giw6SwppMnTV30pN"><!--pnid:wiBlMq9QvWpwSEQYQnhqSq-->前端基础</h4><div data-page-node-id="hcgAnZOzquRWOuM960DJ5W" class="tags">
+          <span data-page-node-id="x49qlpYScoBJu2XkxqEnq5" class="tag"><!--pnid:Y7NaWqxZc8BZorTsQm9o6r-->HTML5</span><span data-page-node-id="LqZw2YwU5wmfZxt1Pub8BO" class="tag"><!--pnid:2NSrc1cTROcrV60C4gB30X-->CSS3</span><span data-page-node-id="GYcKqTydwqo7MxjLaDH0IC" class="tag"><!--pnid:eBI0ymgBfVf8UQxHSq8873-->JavaScript</span><span data-page-node-id="naYPdhTxGTQ2Z2ULQ72CyV" class="tag"><!--pnid:A489H46yvKporgSN8KVBpJ-->ES5 / ES6</span><span data-page-node-id="naXh641rwFSEDRXfZs2Klv" class="tag"><!--pnid:fFWudugoywVUXc2vHtEYDt-->TypeScript</span><span data-page-node-id="BArrWqTjy3EMYkSJ9McOfh" class="tag"><!--pnid:5riAF5cgNOgyodzX4ORWB4-->Ajax</span><span data-page-node-id="VF4BkLCl5L4MnvycRz5UaC" class="tag"><!--pnid:pCtoXBXEyONEdoiH9nQlAt-->ECharts</span>
+        </div></div>
+        <div data-page-node-id="SiXHbAAOizIcqUPV3Z6HAU" class="skill-group"><h4 data-page-node-id="ZUKVgppOAM2ndIqslaiJWy"><!--pnid:K5WF3EoRpTUl4AigvaXeIM-->框架 / 库</h4><div data-page-node-id="e1Lh6PDOV96H2GiTcGodG6" class="tags">
+          <span data-page-node-id="afDl84Ntz0WZ72UsX7O88j" class="tag"><!--pnid:BYW0Qu3wLWWB5SFKURbLkr-->Vue2</span><span data-page-node-id="RTMh4v8LFQ1CCTq8G5gQV1" class="tag"><!--pnid:hgWw3pQJgZLhKsyFfyYLIB-->Vue3</span><span data-page-node-id="5R2PzANBF7dOGYenbsyH28" class="tag"><!--pnid:Zw2HvIo0Zt8axSoOuNzn38-->React</span><span data-page-node-id="ofs6tqCNaSpqCAcvf2Xfrt" class="tag"><!--pnid:E8M5syX91vhPbHWuHURMgu-->React-Native</span><span data-page-node-id="NmDyGe2m5niz2wpsuErMwJ" class="tag"><!--pnid:HUlMHzHNEc97cFhsAD36JD-->jQuery</span><span data-page-node-id="Yw0Of2ZHjYHgbaAwPKsLQi" class="tag"><!--pnid:qP3NCHcAumVlBEmmRUbCKe-->小程序</span><span data-page-node-id="Luf9YZHvLUolQHs0i99Src" class="tag"><!--pnid:KvYhgLJB3EXRJ25q9plCjA-->layUI</span>
+        </div></div>
+        <div data-page-node-id="J1pUtbBRtk5MwCP5hJDN5S" class="skill-group"><h4 data-page-node-id="EdRl9E0AMkRVkNRxseften"><!--pnid:e07hBCjyJ9wR0AMdq0mbkL-->工程化</h4><div data-page-node-id="TlfgtGbpI14lwqd729o3rA" class="tags">
+          <span data-page-node-id="7PbJfdwX5twgWd0UTwpaQY" class="tag"><!--pnid:V8NBj3ya1xUhgKTArOCxkE-->Node</span><span data-page-node-id="GJMifAZS314qaOwbXkjurY" class="tag"><!--pnid:mBmYmgzsjUesFMqtoVwM8n-->Webpack</span><span data-page-node-id="B4YauaNDROSNNXn0oxEJsv" class="tag"><!--pnid:q8bL91yM8gVFFPJPbeDweB-->Vite</span><span data-page-node-id="Pv2aQ6Mg1AgDniqDqHfraS" class="tag"><!--pnid:lOInotJb1qKuDBHHEQmvAn-->qiankun</span><span data-page-node-id="OOTXsD27nNkZq5BsnhveFs" class="tag"><!--pnid:bYfV34QqUzxd3NZzTmyRhQ-->Pinia</span>
+        </div></div>
+      </div>
+      <div data-page-node-id="o4DOnyVN6ahWPwZsZB0lig" class="card reveal">
+        <div data-page-node-id="mYZrXlIue5KgVbChBhGfVc" class="skill-group"><h4 data-page-node-id="SF3infaq0wwaJg1F2tGZWm"><!--pnid:BQkmHtDju7d1VKGDy5mLFr-->地图引擎</h4><div data-page-node-id="Qli0bBUP8vgpoVuuPf7FkW" class="tags">
+          <span data-page-node-id="UkvVjtZ9yctojXjGIjh4AN" class="tag"><!--pnid:Tgf4KE8Rjx6ey5qP6tJIUo-->Cesium</span><span data-page-node-id="lFSRhawUkDf2tVn7lxoY3B" class="tag"><!--pnid:i637R4JBZ0QhOSijCOAo32-->OpenLayers</span><span data-page-node-id="6kmY1fJ8t5vfWRYVhogtVv" class="tag"><!--pnid:sM1icLlKsdsdXhT1pl0fEL-->fengMap（室内）</span>
+        </div></div>
+        <div data-page-node-id="ZmTWd84A9K5pZyvxrzyjdr" class="skill-group"><h4 data-page-node-id="H2PGai7al5CDqclqe2A9nD"><!--pnid:u78wBOj654WebrcIKxeUqG-->后端 / 模板</h4><div data-page-node-id="0JNFIrmYrJvLAHT4goURgC" class="tags">
+          <span data-page-node-id="ltIXK2HUuSz44Qy6lUbL1C" class="tag"><!--pnid:iFEEp6jjqIjrdbSjdTG8Bq-->PHP</span><span data-page-node-id="gnXpboOxWqvLghQ465NMqn" class="tag"><!--pnid:iw0jDiHxW1OrTfrDiQvwL7-->Java</span><span data-page-node-id="jlAn9kL9fwgZdfKaBMTkYk" class="tag"><!--pnid:CdEd35MHFNlr0OcZBtxx86-->RightNow</span><span data-page-node-id="e0ajXMVpYjuZG4BO3r92P8" class="tag"><!--pnid:k7TQ6LUnmoOYOvRLvpxB5b-->YUI</span><span data-page-node-id="wa0XSX8C0LzIE0I42IKLsb" class="tag"><!--pnid:11JYF7AApQbFzPVwQZR0kP-->Thymeleaf</span>
+        </div></div>
+        <div data-page-node-id="AcwLPVl5I3vvZLrkSWukU3" class="skill-group"><h4 data-page-node-id="sPAzHoXWNgiTRYvkQNPzyZ"><!--pnid:ROB38lR19CESa51FINS3TV-->业务领域</h4><div data-page-node-id="FxMVE6MclJEgms5TPVXPg1" class="tags">
+          <span data-page-node-id="EMecmp89TM6f5YqmGAce5K" class="tag"><!--pnid:IZp4YhOr1TS6kfeDGF2LNq-->证券行情 / 交易</span><span data-page-node-id="Lqd2THG8BNmtYCM46iIEXY" class="tag"><!--pnid:MEkV1AlMJCYNGadv0wNOd8-->数据大屏</span><span data-page-node-id="qz5vHCDKLxygO03ACTMtZL" class="tag"><!--pnid:T5y4nKtsDi6gW9A8ZSjWp2-->态势感知</span><span data-page-node-id="j3X9H7u8cSMpqTqcQFk1W0" class="tag"><!--pnid:siNucwle73Ggi1DqLQVwqd-->低代码</span><span data-page-node-id="HtUDgy9OwsnPeHqZOzdXIR" class="tag"><!--pnid:qgvqOVk4l2DTtgAhdLYVSA-->IoT / OTA</span><span data-page-node-id="MiuRqvphWC9WP3hFr0POdI" class="tag"><!--pnid:AtNMVIMYfFl6bAXsPGG3d4-->国土 / 执法</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-page-node-id="E00vwbp9ZAj7mcPo99UbsD" id="exp">
+  <div data-page-node-id="ZYGTxVqpf3hbWFnqYzlu6Y" class="wrap">
+    <div data-page-node-id="AYZPMVpKcb35YPffuRl8uq" class="sec-head reveal">
+      <div data-page-node-id="B9zK3Cl5do0qJd1BHs5gbr" class="eyebrow"><!--pnid:yfY5ptPnEgVKz32D8FHVVe-->Experience</div>
+      <h2 data-page-node-id="uyqiOeUUd38IRegfWiKDLe"><!--pnid:PhZsH1i3YTnvYEvpKqrBpz-->工作经历</h2>
+      <p data-page-node-id="cu5ljRcJV3xbV0gEXTOrhO"><!--pnid:CxehF1BAuDR277MF0u8FfY-->8 年多的前端实战，横跨金融、大数据、军工等多个行业。</p>
+    </div>
+    <div data-page-node-id="HoSdOcT7MVppsNmwwdZobL" class="card reveal">
+      <div data-page-node-id="NGcveUl8fvDAwB8pogZO2J" class="timeline" id="timeline"></div>
+    </div>
+  </div>
+</section>
+
+<section data-page-node-id="l8HV54un745Ph0jSrwZIXb" id="projects" style="background:var(--bg-soft)">
+  <div data-page-node-id="EO6BnG9LUDkZ8S2C1Q4tgu" class="wrap">
+    <div data-page-node-id="ec9zr3eKNwXpG4fYXcbeMP" class="sec-head reveal">
+      <div data-page-node-id="DtRbqLZ4dGOYPfh8MsxrEE" class="eyebrow"><!--pnid:LDcijz9cZLjXscppmDusKd-->Projects</div>
+      <h2 data-page-node-id="wZPKUXhPK25uIxl0b202AY"><!--pnid:9nhyzCI8bKUzXBEvDevXVy-->项目经验</h2>
+      <p data-page-node-id="3FgvHj74CREYa5qBpiC4ls"><!--pnid:KPAL0Ku0nG569k89z1jDoK-->从证券 App 到军工态势感知，挑了几个有代表性的。</p>
+    </div>
+    <div data-page-node-id="6TR0QM2BNv10ZJ7UMg1Onj" class="filters reveal" id="projFilters"></div>
+    <div data-page-node-id="oqpMI4CNAJZlS5NAUXLM6i" class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+<section data-page-node-id="pDwarTP9i7x5G4ZGsqGmo6" id="articles">
+  <div data-page-node-id="B1l0BQXwt7m0iGoEA3sqBI" class="wrap">
+    <div data-page-node-id="ziMN0maoTY7e3Tm2860sU2" class="sec-head reveal">
+      <div data-page-node-id="kcKqOMCzJXNqAgkiqBKZXV" class="eyebrow"><!--pnid:MhOTHWHWm5Xq4dXi238NE5-->Writing</div>
+      <h2 data-page-node-id="qz83fFbZAW7jOzSmGxUHIB"><!--pnid:7CQwvEmuC35w5yhQMMDEBJ-->CSDN 技术文章</h2>
+      <p data-page-node-id="OoHgIG8QS11XD4fy7MRB0c"><!--pnid:PwlV4acKnKdakvRSPD5xW7-->在 CSDN 上分享的前端实战与踩坑笔记，点击任意卡片即可跳转到原文阅读。</p>
+    </div>
+    <div data-page-node-id="pWbyevSfk9B0cnpvBKPZ2R" class="articles-tools reveal">
+      <div data-page-node-id="GCKwI55Fd4qbIV5p8DBXn9" class="search-box"><span data-page-node-id="EKeAmC0Cr00N2kbQt77JI2"><!--pnid:oDzzmC6uZLNz4aGI7rDUJP-->🔍</span><input data-page-node-id="dSSM5TNvsQ2pn71E8St8Ix" id="articleSearch" placeholder="搜索文章标题或标签…"></div>
+      <div data-page-node-id="VRK41V54QnCgN1tNkH0d80" id="articleCount" style="color:var(--muted); font-size:13.5px; font-weight:600"></div>
+    </div>
+    <div data-page-node-id="hC4LkAXMYDWWu1hAdWTDMr" id="sampleNote" style="font-size:13px; color:var(--muted); font-weight:600; margin-bottom:14px"><!--pnid:rUIJGUsHpF9ZtvJKqGV1Oc-->📚 数据来自 CSDN 博客 <a data-page-node-id="319jo8UBB74dCSFzKmQfUg" href="https://blog.csdn.net/qq_36877763" rel="noopener" target="_blank" style="color:var(--brand)"><!--pnid:pVJPd0cr7aZmUdV5N9pjbt-->LiuPing_Xie</a><!--pnid:dPSzlBNHxJ9vsPdWplAvf2-->（前端开发 · 码龄 10 年 · 湖南省），点击卡片即可跳转原文阅读。</div>
+    <div data-page-node-id="D4NwDdBJyoJ7xpbN018Jyg" class="article-list" id="articleList"></div>
+  </div>
+</section>
+
+<section data-page-node-id="c1Fj3dRnIHBe2ex8FWwX2g" id="contact">
+  <div data-page-node-id="bs0dDBHrPQnhVmMVzCMwqf" class="wrap">
+    <div data-page-node-id="2NgTSXrOdiLPhgYzZdQO3H" class="contact reveal">
+      <h2 data-page-node-id="zbT9Sugv5zpzsqR5gKwFQo"><!--pnid:1NcRdhUQV94DWtMJ13pEXo-->一起聊聊前端 / 可视化 / 地图</h2>
+      <p data-page-node-id="S68g7jC81YPCkRtPjMRDVe"><!--pnid:9BKo37tSt9wQdmwsAhye59-->无论是项目合作、技术交流还是岗位机会，都欢迎联系。</p>
+      <div data-page-node-id="5dPlbfPsglHh7naZEePOk1" class="row">
+        <a data-page-node-id="6bLmaFPu6KlicL2go6DWUc" href="mailto:841188903@qq.com"><!--pnid:xMXVAlw75zNMBxwnCWPI5Q-->✉️ 邮箱</a>
+        <a data-page-node-id="GdPZ3rle7zYObXI7t7WoKr" href="tel:13528491897"><!--pnid:nB1qGUtB5hd8j5CnKM6vjl-->📱 电话</a>
+        <a data-page-node-id="68OoPq8FovHA5URHRB9CmO" href="https://blog.csdn.net/qq_36877763" rel="noopener" target="_blank"><!--pnid:njfzrWkCcq1Pydh6LYucjT-->📝 CSDN 博客</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer data-page-node-id="ZA5A5GOP9pltVDx9EOFds3">
+  <div data-page-node-id="32kizFZdBWZ6nRC0DrlqMG" class="wrap"><!--pnid:ckJrGPzQT8QcW2wrXSqun2-->
+    © <span data-page-node-id="qSVmmixHf6pOKSbgBLrWyQ" id="year"></span><!--pnid:BoYAMfG98rSt1rvnsN6yKL--> Devin · 前端开发工程师 &nbsp;|&nbsp; 基于简历与 CSDN 文章自动生成 &nbsp;|&nbsp; <a data-page-node-id="73GQGzeARBRZQGIl4sZfaQ" href="#top"><!--pnid:jQkbGu5v2KvGeYrGWPo0EX-->回到顶部 ↑</a>
+  </div>
+</footer>
+
+<script data-page-node-id="UHaCKhyx2VtOjKI5cZ6IFS" data-pnid-children="MRrGOnQV4LNQG1bshDtjfp">
+/* =========================================================
+   数据区 —— 文章列表（CSDN）
+   把示例替换为你的真实文章即可：title 标题 / url 跳转地址
+   / date 日期 / tags 标签。也可以直接给我 CSDN 主页链接，
+   我会自动抓取并替换这里的内容。
+   ========================================================= */
+const csdnArticles = [
+  { title:"终于搞懂类型声明文件.d.ts和declare了，原来用处如此大", url:"https://blog.csdn.net/qq_36877763/article/details/143159175", date:"2024-10-22", tags:["TypeScript"] },
+  { title:"44 个 React 前端面试问题", url:"https://blog.csdn.net/qq_36877763/article/details/141191541", date:"2024-08-14", tags:["React","面试"] },
+  { title:"前端实现签字效果+合同展示", url:"https://blog.csdn.net/qq_36877763/article/details/141182338", date:"2024-08-14", tags:["实战"] },
+  { title:"为什么面试官都爱问 websocket？", url:"https://blog.csdn.net/qq_36877763/article/details/141166545", date:"2024-08-13", tags:["网络","面试"] },
+  { title:"面试官最喜欢问的 14 种 Vue 修饰符", url:"https://blog.csdn.net/qq_36877763/article/details/137013503", date:"2024-03-25", tags:["Vue","面试"] },
+  { title:"尤雨溪都在推荐的 Vue 拖拽库！", url:"https://blog.csdn.net/qq_36877763/article/details/137002211", date:"2024-03-25", tags:["Vue"] },
+  { title:"面试常问：为什么 Vite 速度比 Webpack 快", url:"https://blog.csdn.net/qq_36877763/article/details/136878019", date:"2024-03-20", tags:["工程化","面试"] },
+  { title:"如何用 js 判断用户长时间无操作", url:"https://blog.csdn.net/qq_36877763/article/details/136877327", date:"2024-03-20", tags:["JavaScript"] },
+  { title:"2024 年 AI 辅助研发趋势", url:"https://blog.csdn.net/qq_36877763/article/details/136809405", date:"2024-03-18", tags:["AI"] },
+  { title:"中高级前端工程师都需要熟悉的技能——前端缓存", url:"https://blog.csdn.net/qq_36877763/article/details/136808667", date:"2024-03-18", tags:["性能优化"] },
+  { title:"前端性能优化篇之 localStorage 和 sessionStorage 的区别及使用", url:"https://blog.csdn.net/qq_36877763/article/details/136808849", date:"2024-03-18", tags:["性能优化"] },
+  { title:"分享几个 ES6 常用的方法", url:"https://blog.csdn.net/qq_36877763/article/details/136778244", date:"2024-03-17", tags:["ES6"] },
+  { title:"28 个令人惊艳的 JavaScript 单行代码", url:"https://blog.csdn.net/qq_36877763/article/details/136767722", date:"2024-03-16", tags:["JavaScript"] },
+  { title:"JavaScript 的 50 个「进阶」知识点", url:"https://blog.csdn.net/qq_36877763/article/details/136709176", date:"2024-03-14", tags:["JavaScript"] },
+  { title:"总结了 38 个 ES6-ES12 的开发技巧，你能拿几分？", url:"https://blog.csdn.net/qq_36877763/article/details/136709892", date:"2024-03-14", tags:["ES6"] },
+  { title:"有了这 25 个正则表达式，代码效率提高 80%", url:"https://blog.csdn.net/qq_36877763/article/details/136709629", date:"2024-03-14", tags:["JavaScript"] },
+  { title:"setTimeout + Promise + Async 输出顺序？", url:"https://blog.csdn.net/qq_36877763/article/details/136709462", date:"2024-03-14", tags:["JavaScript"] },
+  { title:"e.target 和 e.currentTarget 的区别？你到底知不知道？", url:"https://blog.csdn.net/qq_36877763/article/details/136709368", date:"2024-03-14", tags:["JavaScript"] },
+  { title:"聊聊 vue 的 nextTick 方法", url:"https://blog.csdn.net/qq_36877763/article/details/136707965", date:"2024-03-14", tags:["Vue"] },
+  { title:"你不知道的 JSON.stringify 神操作", url:"https://blog.csdn.net/qq_36877763/article/details/136563837", date:"2024-03-08", tags:["JavaScript"] },
+  { title:"Vue3 和 Vue2 的相关面试知识点，一点要记住", url:"https://blog.csdn.net/qq_36877763/article/details/136509887", date:"2024-03-06", tags:["Vue","面试"] },
+  { title:"面试官：你知道几种数组扁平化的方法？", url:"https://blog.csdn.net/qq_36877763/article/details/136454115", date:"2024-03-04", tags:["JavaScript","面试"] },
+  { title:"如何限制一个账号只在一处登陆", url:"https://blog.csdn.net/qq_36877763/article/details/136432340", date:"2024-03-03", tags:["实战"] },
+  { title:"七种去掉 if…else 绝佳之法", url:"https://blog.csdn.net/qq_36877763/article/details/136428524", date:"2024-03-03", tags:["JavaScript"] },
+  { title:"Vue3 和 ElementPlus 封装 table 组件", url:"https://blog.csdn.net/qq_36877763/article/details/136425234", date:"2024-03-03", tags:["Vue"] },
+  { title:"后端一次性返回 10 万条数据给你，你如何处理？前端分页？", url:"https://blog.csdn.net/qq_36877763/article/details/136419154", date:"2024-03-02", tags:["性能优化"] },
+  { title:"在 vue 中使用 watch 要适度，不能滥用，然后成屎山代码", url:"https://blog.csdn.net/qq_36877763/article/details/136418802", date:"2024-03-02", tags:["Vue"] },
+  { title:"源码视角，vue3 为什么推荐用 ref，而不是 reactive", url:"https://blog.csdn.net/qq_36877763/article/details/136418490", date:"2024-03-02", tags:["Vue"] },
+  { title:"值得学习的 javaScript 调试技巧", url:"https://blog.csdn.net/qq_36877763/article/details/136418294", date:"2024-03-02", tags:["JavaScript"] },
+  { title:"JavaScript 数组操作指南：20 个精通操作技巧", url:"https://blog.csdn.net/qq_36877763/article/details/136385752", date:"2024-03-01", tags:["JavaScript"] },
+  { title:"15 个非常实用的 JavaScript 技巧，提高你的开发效率", url:"https://blog.csdn.net/qq_36877763/article/details/136385506", date:"2024-03-01", tags:["JavaScript"] },
+  { title:"Vue3 中组件通讯的方式", url:"https://blog.csdn.net/qq_36877763/article/details/136372805", date:"2024-02-29", tags:["Vue"] },
+  { title:"ref 和 reactive 用哪个？", url:"https://blog.csdn.net/qq_36877763/article/details/136370025", date:"2024-02-29", tags:["Vue"] },
+  { title:"在 Vue.js 中选择 let 还是 const 来声明响应式引用", url:"https://blog.csdn.net/qq_36877763/article/details/136367234", date:"2024-02-29", tags:["Vue"] },
+  { title:"祖传代码：程序员的魔法秘籍，程序员是如何看待「祖传代码」的？", url:"https://blog.csdn.net/qq_36877763/article/details/136366610", date:"2024-02-29", tags:["随笔"] },
+  { title:"常见 Vue 原理面试题", url:"https://blog.csdn.net/qq_36877763/article/details/136362491", date:"2024-02-29", tags:["Vue","面试"] },
+  { title:"合并两个有序链表", url:"https://blog.csdn.net/qq_36877763/article/details/134328530", date:"2023-11-10", tags:["算法"] },
+  { title:"进阶篇：浏览器（前端）相关知识", url:"https://blog.csdn.net/qq_36877763/article/details/134326936", date:"2023-11-10", tags:["前端"] },
+  { title:"进阶篇：JS 必备的知识要点", url:"https://blog.csdn.net/qq_36877763/article/details/134308208", date:"2023-11-09", tags:["JavaScript"] },
+  { title:"进阶篇：postcss 的插件机制", url:"https://blog.csdn.net/qq_36877763/article/details/134267213", date:"2023-11-07", tags:["工程化"] },
+  { title:"前端面试核心技术栈 - 非技术问题（十）", url:"https://blog.csdn.net/qq_36877763/article/details/134146311", date:"2023-10-31", tags:["面试"] },
+  { title:"前端面试核心技术栈 - 其他技术问题（九）", url:"https://blog.csdn.net/qq_36877763/article/details/134145975", date:"2023-10-31", tags:["面试"] },
+  { title:"前端面试核心技术栈 - 编程题（八）", url:"https://blog.csdn.net/qq_36877763/article/details/134145339", date:"2023-10-31", tags:["面试","算法"] },
+  { title:"前端面试核心技术栈 - webpack 相关（七）", url:"https://blog.csdn.net/qq_36877763/article/details/134145168", date:"2023-10-31", tags:["面试","工程化"] },
+  { title:"前端面试核心技术栈 - 微信小程序（六）", url:"https://blog.csdn.net/qq_36877763/article/details/134145039", date:"2023-10-31", tags:["面试","小程序"] },
+  { title:"前端面试核心技术栈 - Bootstrap（五）", url:"https://blog.csdn.net/qq_36877763/article/details/134144594", date:"2023-10-31", tags:["面试"] },
+  { title:"前端面试核心技术栈 - jQuery 篇（四）", url:"https://blog.csdn.net/qq_36877763/article/details/134102171", date:"2023-10-31", tags:["面试","jQuery"] },
+  { title:"前端面试核心技术栈 - javaScript 篇（三）", url:"https://blog.csdn.net/qq_36877763/article/details/134096811", date:"2023-10-29", tags:["面试","JavaScript"] },
+  { title:"前端面试核心技术栈 - CSS 篇（二）", url:"https://blog.csdn.net/qq_36877763/article/details/134074577", date:"2023-10-27", tags:["面试","CSS"] },
+  { title:"前端面试核心技术栈 - HTML、HTTP、web 综合问题（一）", url:"https://blog.csdn.net/qq_36877763/article/details/134039840", date:"2023-10-27", tags:["面试","前端"] },
+  { title:"前端树状结构搜索过滤解析", url:"https://blog.csdn.net/qq_36877763/article/details/125445233", date:"2022-06-24", tags:["JavaScript"] },
+  { title:"地图：地图多边形中心点获取", url:"https://blog.csdn.net/qq_36877763/article/details/125445062", date:"2022-06-24", tags:["地图"] },
+  { title:"Linux vim 怎么保存退出 vim 怎么用", url:"https://blog.csdn.net/qq_36877763/article/details/108880918", date:"2020-09-30", tags:["工具"] },
+  { title:"react 开发需注意的几点", url:"https://blog.csdn.net/qq_36877763/article/details/102738384", date:"2019-10-25", tags:["React"] },
+  { title:"7 种方法实现数组去重", url:"https://blog.csdn.net/qq_36877763/article/details/100119731", date:"2019-08-28", tags:["JavaScript"] },
+  { title:"vue 的生命周期", url:"https://blog.csdn.net/qq_36877763/article/details/90513532", date:"2019-05-24", tags:["Vue"] },
+  { title:"Fiddler4 抓包工具使用教程", url:"https://blog.csdn.net/qq_36877763/article/details/90448430", date:"2019-05-22", tags:["工具"] }
+];
+
+/* ---------- 工作经历数据 ---------- */
+const experiences = []; // 工作经历数据保密
+
+/* ---------- 项目数据 ---------- */
+const projects = [
+  { cat:"地图 / 可视化", name:"军工保密项目（信息分析与典型应用）", date:"2025.06 – 2026.01",
+    desc:"涵盖 Cesium 地图、无人机实时数据引接、模型管理、算法库与 AI 大模型。实验包负责战场目标检测 / 轨迹预测 / AI 智能聊天生成报告；前端 Vue3 / React / Cesium / Pinia / Vite。",
+    stack:["Vue3","React","Cesium","Vite","Pinia"] },
+  { cat:"态势感知", name:"泰和 / 中国移动云态势感知", date:"2024.07 – 2025.04",
+    desc:"态势大屏、安星智能体、AI 研判、AI 助理等模块；负责国际化处理与前端组需求整合、技术指导。",
+    stack:["Vue","AI","国际化","大屏"] },
+  { cat:"低代码", name:"低代码数据大屏平台", date:"2023.08 – 2023.11",
+    desc:"图表组件 / 图片组件 / 各类小组件 / 室内地图 fengMap / 中国地图，支持拖拽到画布并配置参数、样式与请求（HTTP / SQL / 数据模型）。",
+    stack:["Vue","ECharts","fengMap","拖拽"] },
+  { cat:"IoT", name:"设备中心管理平台", date:"2023.11 – 2024.04",
+    desc:"品类 / 产品 / 设备 / 通信协议 / 第三方插件 / 白名单 / 固件 OTA 等模块的开发。",
+    stack:["Vue","IoT","OTA","协议"] },
+  { cat:"地图 / 国土", name:"中地一张图（地图组件）", date:"2019.09 – 2020.12",
+    desc:"基于 OpenLayers 的应用地图：定位、图层查询、地块分析、红线定位、地块识别、画卷帘、出图等；React / Vue / ES6 / Webpack。",
+    stack:["OpenLayers","React","Vue","Webpack"] },
+  { cat:"移动端", name:"三水 / 信宜 国土审批（移动端）", date:"2022.08 – 2023.05",
+    desc:"土地申请 / 批复 / 审核业务一体，融合权限管理、地图组件与工作流引擎；React-Native / Vue2 / Vue3。",
+    stack:["React-Native","Vue","工作流","地图"] },
+  { cat:"大屏", name:"通村数据平台（数字大屏）", date:"2019.03 – 2019.05",
+    desc:"行业概况 / 数据概览 / 数据分析模块，ECharts 地图 / 饼图 / 线柱图；定制班车 / 出租车 / 包车 / 呼叫班车。",
+    stack:["Vue","Element","ECharts","Webpack"] },
+  { cat:"证券", name:"中信 / 中银 / 联讯 证券前端", date:"2017.07 – 2019.02",
+    desc:"投顾新闻 / 组合 / 直播 / 问答；H5 行情交易（股票行情 / 交易 / 资讯 / 我的）；标准化高性能开发。",
+    stack:["Vue","jQuery","Node","H5"] }
+];
+
+/* ---------- 渲染：时间线 ---------- */
+document.getElementById('timeline').innerHTML = experiences.length ? experiences.map(e=>`
+  <div class="tl-item">
+    <div class="tl-top"><h3>${e.title} · ${e.org}</h3><span class="tl-date">${e.date}</span></div>
+    <div class="tl-org">${e.org}</div>
+    <p>${e.desc}</p>
+  </div>`).join('') : `
+  <div class="exp-locked">
+    <div class="lock">🔒</div>
+    <h3>工作经验保密</h3>
+    <p>出于保密要求，工作经历不在此公开。如需了解详细简历，欢迎添加微信或发送邮件联系我。</p>
+    <div class="row">
+      <a href="tel:13528491897">💬 微信 / 电话 13528491897</a>
+      <a href="mailto:841188903@qq.com">✉️ 841188903@qq.com</a>
+    </div>
+  </div>`;
+
+/* ---------- 渲染：项目（含筛选） ---------- */
+const cats = ["全部", ...Array.from(new Set(projects.map(p=>p.cat)))];
+const filterBox = document.getElementById('projFilters');
+filterBox.innerHTML = cats.map((c,i)=>`<button class="${i===0?'active':''}" data-cat="${c}">${c}</button>`).join('');
+function renderProjects(cat){
+  const list = cat==="全部"?projects:projects.filter(p=>p.cat===cat);
+  document.getElementById('projGrid').innerHTML = list.map(p=>`
+    <div class="card proj">
+      <span class="badge">${p.cat}</span>
+      <h3>${p.name}</h3>
+      <div class="meta">${p.date}</div>
+      <p>${p.desc}</p>
+      <div class="stack">${p.stack.map(s=>`<span>${s}</span>`).join('')}</div>
+    </div>`).join('');
+}
+renderProjects("全部");
+filterBox.addEventListener('click',e=>{
+  if(e.target.tagName!=='BUTTON')return;
+  filterBox.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderProjects(e.target.dataset.cat);
+});
+
+/* ---------- 渲染：文章列表 ---------- */
+const listEl = document.getElementById('articleList');
+const countEl = document.getElementById('articleCount');
+function renderArticles(q=''){
+  const arr = csdnArticles.filter(a=>(a.title+a.tags.join('')).toLowerCase().includes(q.toLowerCase()));
+  countEl.textContent = `共 ${arr.length} 篇`;
+  listEl.innerHTML = arr.map((a,i)=>`
+    <a class="article" href="${a.url}" target="_blank" rel="noopener">
+      <div class="idx">${String(i+1).padStart(2,'0')}</div>
+      <div class="main">
+        <h3>${a.title}</h3>
+        <div class="sub"><span>📅 ${a.date}</span><span>🔗 CSDN 原文</span></div>
+        <div class="chips">${a.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+      </div>
+      <div class="go">阅读 <span class="arrow">→</span></div>
+    </a>`).join('') || `<div style="color:var(--muted);padding:20px">没有匹配的文章。</div>`;
+}
+renderArticles();
+document.getElementById('articleSearch').addEventListener('input',e=>renderArticles(e.target.value));
+
+/* ---------- 数字滚动 ---------- */
+function animateStats(){
+  document.querySelectorAll('.stat .num[data-to]').forEach(el=>{
+    const to=parseFloat(el.dataset.to); let cur=0; const step=to/40;
+    const t=setInterval(()=>{cur+=step; if(cur>=to){cur=to;clearInterval(t);} el.textContent=cur.toFixed(1).replace(/\.0$/,'')+(to%1? '':'+');},24);
+  });
+}
+
+/* ---------- 主题切换 ---------- */
+const themeBtn=document.getElementById('themeBtn');
+const saved=localStorage.getItem('theme');
+if(saved){document.documentElement.setAttribute('data-theme',saved);themeBtn.textContent=saved==='dark'?'☀️':'🌙';}
+themeBtn.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',cur);
+  localStorage.setItem('theme',cur);
+  themeBtn.textContent=cur==='dark'?'☀️':'🌙';
+});
+
+/* ---------- 移动端菜单 ---------- */
+document.getElementById('menuToggle').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('show');
+});
+
+/* ---------- 滚动揭示 ---------- */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+animateStats();
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
