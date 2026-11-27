@@ -49,11 +49,21 @@
   .hero-bg::before,.hero-bg::after{content:"";position:absolute;border-radius:50%;filter:blur(60px)}
   .hero-bg::before{width:420px;height:420px;background:radial-gradient(circle,var(--brand),transparent 70%);top:-140px;right:-80px;opacity:.35}
   .hero-bg::after{width:360px;height:360px;background:radial-gradient(circle,var(--brand-2),transparent 70%);bottom:-160px;left:-100px;opacity:.28}
+  .hero-bg cos-starfield{position:absolute;inset:0;display:block;pointer-events:none;opacity:.16;filter:invert(1)}
+  html[data-theme="dark"] .hero-bg cos-starfield{opacity:.9;filter:none}
   .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;gap:42px;align-items:center}
   .avatar{width:148px;height:148px;border-radius:28px;background:linear-gradient(135deg,var(--brand),var(--brand-2));
     display:grid;place-items:center;color:#fff;font-size:62px;font-weight:800;box-shadow:var(--shadow);
     border:4px solid var(--bg-card)}
   .hero h1{font-size:40px;line-height:1.2;font-weight:800;letter-spacing:.5px}
+  .hero h1 .cos-scramble-text{display:inline-flex;justify-content:flex-start;background:transparent;padding:0;min-height:0;border-radius:0}
+  .hero h1 .cos-scramble-text__text{color:var(--text);font:inherit;letter-spacing:.5px;text-shadow:none;margin:0}
+  .hero h1 .cos-scramble-text__cursor{display:none}
+  /* 章节标题 hover 流光 */
+  .sec-head h2:hover{background:linear-gradient(90deg,var(--brand),var(--brand-2),var(--brand));
+    background-size:200% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;animation:title-sweep 3s linear infinite}
+  @keyframes title-sweep{from{background-position:0 0}to{background-position:200% 0}}
   .hero .role{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:16px;font-weight:600;color:var(--brand);
     background:var(--brand-soft);padding:6px 14px;border-radius:999px}
   .hero .role .pin{font-size:14px}
@@ -145,6 +155,15 @@
   .contact .row{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .contact .row a{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;padding:11px 20px;border-radius:12px;font-weight:700;font-size:14px;transition:.2s}
   .contact .row a:hover{background:rgba(255,255,255,.28);transform:translateY(-2px)}
+  .contact{position:relative;overflow:hidden}
+  .contact h2,.contact p,.contact .row{position:relative;z-index:1}
+  .contact cos-meteor-rain{position:absolute;inset:0;display:block;pointer-events:none;opacity:.35}
+  /* ---------- 项目区粒子背景（深色主题） ---------- */
+  #projects{position:relative;overflow:hidden}
+  #projects .proj-bg{position:absolute;inset:0;z-index:0;pointer-events:none;display:none}
+  #projects .proj-bg .cos-particle-network__hint{display:none}
+  #projects .wrap{position:relative;z-index:1}
+  html[data-theme="dark"] #projects .proj-bg{display:block;opacity:.6}
   /* ---------- FOOTER ---------- */
   footer{padding:34px 0;text-align:center;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line);margin-top:20px}
   footer a{color:var(--brand);font-weight:600}
@@ -166,6 +185,7 @@
     .article .go{grid-column:2;justify-self:start}
   }
 </style>
+<link rel="stylesheet" href="./vendor/cos/scramble-text.css">
 </head>
 <body data-page-node-id="OYrCM9UjAB1geijpppurdo">
 
@@ -188,11 +208,11 @@
 </nav>
 
 <header data-page-node-id="5ColGvJizr6m7Bu5ovsM3P" class="hero">
-  <div data-page-node-id="oHQbBol3g9oAuNhOxXrwTj" class="hero-bg"></div>
+  <div data-page-node-id="oHQbBol3g9oAuNhOxXrwTj" class="hero-bg"><cos-starfield fill star-count="160" speed="0.5"></cos-starfield></div>
   <div data-page-node-id="pCvXfRwreyDEOA7a0x1UTn" class="wrap hero-inner">  
     <div data-page-node-id="HmMERkZDNPn37BGrfKFWRO" class="avatar"><!--pnid:RQWjNFQHBkt805wB0B20Ur-->D</div>
     <div data-page-node-id="6BXefhgdWoBy9AofRPtmG5">
-      <h1 data-page-node-id="GgebQ0pYSjpk5XqgVQqm2F"><!--pnid:1uFk7Gp55Pq8bQQ1VXITgY-->Devin</h1>
+      <h1 data-page-node-id="GgebQ0pYSjpk5XqgVQqm2F"><cos-scramble-text text="Devin" duration="1400"></cos-scramble-text></h1>
       <div data-page-node-id="ooj3dRggLuESyGzHPDRcd1" class="role"><span data-page-node-id="x1LFir48HxOQytmSZ0DfqC" class="pin"><!--pnid:nLgIOYiyxKiMoquCnBDVBd-->📍</span><!--pnid:HS0qIDMgjZxpWM46HUFC3r--> 前端开发工程师 · 中国</div>
       <p data-page-node-id="iKUfNs4eIIO73wgeTvDKfP" class="bio"><!--pnid:bYGXVt0j9ZsW5sjx7QHHH5-->9 年前端开发经验，深耕金融证券、管理系统、数据可视化大屏、Cesium/OpenLayer 二三维地图与态势感知系统。带过前端团队，主导过框架选型、低代码平台与 AI 研判类项目，也写技术专利与技术博客。</p>
       <div data-page-node-id="ruCdFuOh79DKw3dnBFvFcu" class="cta">
@@ -219,7 +239,7 @@
     <div data-page-node-id="smNxMQb883JKIQGm5CDt0g" class="sec-head reveal">
       <div data-page-node-id="SAuIriTfdccFJB7ZsN9U5P" class="eyebrow"><!--pnid:AVii6Byl7llx48vmH7sLrv-->About</div>
       <h2 data-page-node-id="jcve8yObIincYzE04FRRuC"><!--pnid:kQ88nj8s2jRsB1ws4Ua864-->关于我</h2>
-      <p data-page-node-id="gGXjqO13oOQWAbzTrjVvtS"><!--pnid:umhn6XhuZVbahnvPsBKc9v-->材料化学本科跨界前端，从证券行情交易 H5 做起，逐步覆盖大屏可视化、地图引擎与军工态势感知系统。喜欢把复杂业务抽象成可复用组件，也乐于做技术沉淀与分享。</p>
+      <p data-page-node-id="gGXjqO13oOQWAbzTrjVvtS"><!--pnid:umhn6XhuZVbahnvPsBKc9v-->从 17 年开始从事前端开发，从证券行情交易 H5 做起，逐步覆盖大屏可视化、地图引擎与军工态势感知系统。喜欢把复杂业务抽象成可复用组件，也乐于做技术沉淀与分享。</p>
     </div>
     <div data-page-node-id="8Ps0xqAm5lZgszZs0ccOj5" class="card reveal">
       <ul data-page-node-id="9U2Ab2HsVdjoFID8CEPj5O" class="about-list">
@@ -281,6 +301,7 @@
 </section>
 
 <section data-page-node-id="l8HV54un745Ph0jSrwZIXb" id="projects" style="background:var(--bg-soft)">
+  <div class="proj-bg"><cos-particle-network fill particle-count="70" link-distance="120" repel-radius="90" color="#6d87ff"></cos-particle-network></div>
   <div data-page-node-id="EO6BnG9LUDkZ8S2C1Q4tgu" class="wrap">
     <div data-page-node-id="ec9zr3eKNwXpG4fYXcbeMP" class="sec-head reveal">
       <div data-page-node-id="DtRbqLZ4dGOYPfh8MsxrEE" class="eyebrow"><!--pnid:LDcijz9cZLjXscppmDusKd-->Projects</div>
@@ -311,6 +332,7 @@
 <section data-page-node-id="c1Fj3dRnIHBe2ex8FWwX2g" id="contact">
   <div data-page-node-id="bs0dDBHrPQnhVmMVzCMwqf" class="wrap">
     <div data-page-node-id="2NgTSXrOdiLPhgYzZdQO3H" class="contact reveal">
+      <cos-meteor-rain fill meteor-count="9"></cos-meteor-rain>
       <h2 data-page-node-id="zbT9Sugv5zpzsqR5gKwFQo"><!--pnid:1NcRdhUQV94DWtMJ13pEXo-->一起聊聊前端 / 可视化 / 地图</h2>
       <p data-page-node-id="S68g7jC81YPCkRtPjMRDVe"><!--pnid:9BKo37tSt9wQdmwsAhye59-->无论是项目合作、技术交流还是岗位机会，都欢迎联系。</p>
       <div data-page-node-id="5dPlbfPsglHh7naZEePOk1" class="row">
@@ -519,6 +541,13 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 animateStats();
 document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+<script type="module">
+  // cos-design 视觉特效（本地 vendor，无外部依赖）
+  import "./vendor/cos/starfield.js";
+  import "./vendor/cos/particle-network.js";
+  import "./vendor/cos/meteor-rain.js";
+  import "./vendor/cos/scramble-text.js";
 </script>
 </body>
 </html>
